@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "435218410225",
+    "project_id": "messenger-88906",
+    "storage_bucket": "messenger-88906.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435218410225:android:5bc8f927c40d392a8e5750",
+        "android_client_info": {
+          "package_name": "com.moinonemoi.messenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "435218410225-ihj9gnd99rb7kio89t1plfuhakvbglte.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCri2USVlfzyFFghslS0ZxiJbl3LXV18uk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "435218410225-ihj9gnd99rb7kio89t1plfuhakvbglte.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

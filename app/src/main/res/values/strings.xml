@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Messenger</string>
+    <string name="messenger">Messenger</string>
+    <string name="your_email">your email</string>
+    <string name="password">password</string>
+    <string name="login">LOGIN</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="register">Register</string>
+    <string name="registration">Registration</string>
+    <string name="email">Email</string>
+    <string name="password_register">Password</string>
+    <string name="nameRegister">Name</string>
+    <string name="last_name_register">Last Name</string>
+    <string name="how_old_are_you_register">How old are you?</string>
+    <string name="sign_up">sign up</string>
+    <string name="forgot_password_heading">Forgot password?</string>
+    <string name="your_email_forgot_password">Your email:</string>
+    <string name="reset_password_button">Reset password</string>
+</resources>
