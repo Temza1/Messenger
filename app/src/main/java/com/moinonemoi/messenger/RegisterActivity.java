@@ -2,6 +2,8 @@ package com.moinonemoi.messenger;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText editTextName;
     private EditText editTextLastName;
     private EditText editTextHowOldAreYou;
+    private RegistrationViewModel viewModel;
 
 
     @Override
@@ -34,42 +37,9 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         initViews();
+        viewModel = new ViewModelProvider(this).get(RegistrationViewModel.class);
+        observeViewModel();
 
-        /*auth = FirebaseAuth.getInstance();*/
-
-        /*auth.signInWithEmailAndPassword(email,password)
-                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        FirebaseUser user = auth.getCurrentUser();
-                        if(user == null) {
-                            Log.d(LOG_TAG,"Not authorized");
-                        } else {
-                            Log.d(LOG_TAG,"Authorized");
-                            authorizedOrNot = true;
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d(LOG_TAG,e.getMessage());
-                        Toast.makeText(MainActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                });*/
-
-        /*login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (authorizedOrNot && checkValidation(email,password)) {
-                    launchUsersActivity(email,password);
-                } else {
-                    Toast.makeText(MainActivity.this,"Сначала требуется регистрация",Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });*/
 
         ButtonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,10 +49,32 @@ public class RegisterActivity extends AppCompatActivity {
                 String name = getTrimmedValue(editTextName);
                 String lastName = getTrimmedValue(editTextLastName);
                 int age = Integer.parseInt(getTrimmedValue(editTextHowOldAreYou));
-                launchUsersActivity();
+                viewModel.signUp(email,password,name,lastName,age);
             }
         });
 
+    }
+
+    private void observeViewModel() {
+        viewModel.getError().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String errorMessage) {
+                if(errorMessage != null) {
+                    Toast.makeText(RegisterActivity.this,errorMessage,Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        viewModel.getUser().observe(this, new Observer<FirebaseUser>() {
+            @Override
+            public void onChanged(FirebaseUser firebaseUser) {
+                if(firebaseUser != null) {
+                    Intent intent = UsersActivity.newIntent(RegisterActivity.this);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
     }
 
     private void launchUsersActivity() {
